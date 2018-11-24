@@ -1,24 +1,20 @@
 <html>
-    <body>
-        Delete {{item.name}} from {{restaurant.name}}?
+<head>
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+	</head>
+<body>
+<h1> Are you sure you want to delete {{item.name}}? </h1>
 
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                <ul>
-                    {% for message in messages %}
-                        <li><strong>{{message}}</strong></li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-        {% endwith %}
+<form action="{{ url_for('deleteMenuItem',restaurant_id = item.restaurant_id, menu_id=item.id)}}" method = 'post'>
 
-        <form
-            action="{{url_for('deleteMenuItem',restaurant_id=restaurant.id,menu_id=item.id)}}"
-            method="post"
-        >
-            <input type="submit" value="Delete">
-        </form>
-        <a href="{{url_for('restaurantMenu',restaurant_id=restaurant.id)}}">Cancel</a>
+<input type='submit', value = 'Delete'>
 
-    </body>
+
+
+
+</form>
+
+<a href = '{{url_for('restaurantMenu', restaurant_id = restaurant.id)}}'> Cancel </a>
+</body>
+
 </html>
